@@ -40,6 +40,15 @@ export const MedicationController = {
       res.status(404).json({ error: err.message }); 
     } 
   }, 
+
+  async getTotalMedications(req, res) {
+    try {
+      const total = await MedicationModel.getTotalCount();
+      res.json({ total_medications: total });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
  
   async create(req, res) { 
     try { 

@@ -35,7 +35,6 @@ export const MedicationModel = {
 
     if (error) throw error; 
 
-    // Calculate total pages
     const totalPages = Math.ceil(count / limit);
 
     return {
@@ -102,4 +101,13 @@ export const MedicationModel = {
     if (error) throw error; 
     return { success: true }; 
   }, 
+
+  async getTotalCount() {
+    const { count, error } = await supabase
+      .from("medications")
+      .select('*', { count: 'exact', head: true });
+
+    if (error) throw error;
+    return count;
+  },
 };
