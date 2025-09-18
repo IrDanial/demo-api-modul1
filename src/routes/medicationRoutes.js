@@ -4,6 +4,7 @@ import { MedicationController } from
  
 const router = express.Router(); 
  
+router.get("/search", MedicationController.searchByName);
 router.get("/", MedicationController.getAll); 
 router.get("/paginated", MedicationController.getPaginated);
 router.get("/:id", MedicationController.getById); 
