@@ -10,6 +10,19 @@ export const MedicationController = {
     } 
   }, 
 
+  async searchByName(req, res) {
+    try {
+      const { name } = req.query;
+      if (!name) {
+        return res.status(400).json({ error: "Search parameter 'name' is required." });
+      }
+      const meds = await MedicationModel.searchByName(name);
+      res.json(meds);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+
  async getPaginated(req, res) { 
     try { 
       const { page = 1, limit = 2 } = req.query;

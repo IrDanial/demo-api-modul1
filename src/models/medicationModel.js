@@ -48,6 +48,19 @@ export const MedicationModel = {
       }
     };
   }, 
+
+  async searchByName(name) {
+    const { data, error } = await supabase
+      .from("medications")
+      .select(
+        "id, sku, name, description, price, quantity, category_id, supplier_id"
+      )
+      .ilike('name', `%${name}%`)
+      .order('id');
+
+    if (error) throw error;
+    return data;
+  },
  
   async getById(id) { 
     const { data, error } = await supabase 
